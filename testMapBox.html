@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>KML Data</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  .marker {
+  background-image: url('image.png');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+
+<div id='map'></div>
+
+<script>
+
+L.mapbox.accessToken = 'pk.eyJ1IjoiYmVuamFtaW5tYXBib3giLCJhIjoiY2tmbWlvYWpkMGN0djJybng3eXR6NXcyeSJ9.eOasr5ivxhUIoBeS2bpZ6w';
+var map = L.mapbox.map('map')
+    .setView([38.1089, 13.3545], 2)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+var featureLayer = L.mapbox.featureLayer()
+    .loadURL('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/mygeodata_merged.json')
+    .addTo(map);
+console.log(featureLayer);
+geojson= featureLayer._geojson; 
+console.log(geojson);
+
+// add markers to map
+geojson.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+    .setLngLat(marker.geometry.coordinates)
+    .addTo(map);
+});
+      
+</script>
+</body>
+</html>
