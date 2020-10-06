@@ -8,8 +8,17 @@
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
     />
     <script src="https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+        <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
     
     <link
       href="https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css"
@@ -20,12 +29,25 @@
         margin: 0;
         padding: 0;
       }
-      #map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-      }
+        #map { position:absolute; top:0; bottom:0; left: 0; right: 0; width:100%; height: 100%; }
+        #accordionExample {
+            height: 0%;
+            width: 300px;
+            margin-top: 80px;
+            background: #fff;
+            border-radius: 5px;
+            position: absolute;
+            opacity: 0.9;
+        }
+        #moreInfo {
+          background: #fff;
+          width:100%;
+          height:50px;
+          position:fixed;
+          top: 100%;
+          margin:-50px auto 0 auto;
+          border: 1px solid black;
+        }
     .popupCustom .leaflet-popup-tip,
     .popupCustom .leaflet-popup-content-wrapper {
         background: #e0e0e0;
@@ -38,29 +60,105 @@
     </style>
   </head>
   <body>
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
-    <link
-    rel="stylesheet"
-    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
-    type="text/css"
-    />
-<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
-  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-    <div id="map"></div>    
+<div id='map'></div>
+<div id='moreInfo'>For point A (Madeiradrid) to point B (Paris) :The calculated latency of the ella.link networkis, on everage : 27 ms.</div>
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-dark btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Network
+        </button>
+      </h2>
+    </div>
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div>
+        <input type="radio" id="LongHaulFibre" name="Network"
+               >
+        <label for="LongHaulFibre">Long Haul Fibre</label>
+      </div>
+      <div>
+        <input type="radio" id="MetroFibre" name="Network">
+        <label for="MetroFibre">Metro Fibre</label>
+      </div>
+        <div>
+          <input type="radio" id="Leased" name="Network"
+                 >
+          <label for="Leased">Leased</label>
+      </div>
+      <div>
+          <input type="radio" id="Spectrum" name="Network"
+                 >
+          <label for="Spectrum">Spectrum</label>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn btn-dark btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Buildings
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" >
+      <div>
+        <input type="checkbox" id="DataCenters" name="DataCenters"
+               >
+        <label for="scales">Data Centers</label>
+      </div>
+      <div>
+        <input type="checkbox" id="BuisnessCenters" name="BuisnessCenters">
+        <label for="horns">Buisness Centers</label>
+      </div>
+        <div>
+          <input type="checkbox" id="Ella.linkOffices" name="Ella.linkOffices"
+                 >
+          <label for="scales">Ella.link Offices</label>
+      </div>
+      <div>
+          <input type="checkbox" id="Others" name="Others"
+                 >
+          <label for="scales">Others</label>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn btn-dark btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Services
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" >
+      <div>
+        <input type="checkbox" id="Capacity" name="Capacity"
+               >
+        <label for="scales">Capacity</label>
+      </div>
+      <div>
+        <input type="checkbox" id="Internet" name="Internet">
+        <label for="horns">Internet</label>
+      </div>
+        <div>
+          <input type="checkbox" id="Ethernet" name="Ethernet&VPN"
+                 >
+          <label for="scales">Ethernet & VPN</label>
+      </div>
+    </div>
+  </div>
+</div>
+    
     <script>
       L.mapbox.accessToken =
         "pk.eyJ1IjoiYmVuamFtaW5tYXBib3giLCJhIjoiY2tmbWlta3I5MDM2cjJ4b2ZuMHkwZGc3MiJ9.G3LZcBfCM_fI0GD3socJVg";
+        
       var map = L.mapbox
         .map("map")
         .setView([10.89014, -24.98042], 4)
-        .addControl(
-          new MapboxGeocoder({
-          accessToken: L.mapbox.accessToken,
-          mapboxgl: L.mapbox
-          })
-          )
         .addLayer(L.mapbox.styleLayer("mapbox://styles/mapbox/streets-v11"));
+
       var featureLayer = L.mapbox
         .featureLayer({
           type: "FeatureCollection",
