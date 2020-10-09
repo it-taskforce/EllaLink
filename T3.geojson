@@ -1,0 +1,105 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Equinix RJ 2",
+        "description": "EQUINIX- RJ 2 (ALOG 2)\nEst Adhemar Bebiano (Est Velha da Pavuna) - n° 1380"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.27294192772933,
+          -22.87121188724827
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Interxion MRS2",
+        "description": null
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            5.346808534976622,
+            43.33904668573267
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "CLS",
+        "description": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -16.94402449451962,
+          32.64447916214544
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "EQUINIX SP3",
+        "description": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.8627771503016,
+          -23.4656126399254
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "EQUINIX SP2",
+        "description": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.82740076642122,
+          -23.50261424308096
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "EQUINIX SP4",
+        "description": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.80984455916308,
+          -23.49403551291482
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "CLS",
+        "description": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -23.49461055290029,
+          14.92210039357609
+        ]
+      }
+    }
+  ]
+}
