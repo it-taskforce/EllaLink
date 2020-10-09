@@ -12,7 +12,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
 
         <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -61,10 +62,14 @@
         tranform:skew(30deg);
     }
     </style>
+       <style>
+
+    </style>
   </head>
 
   <body>
-<div id='map' class="bonjour"></div>
+<nav id="menu"></nav>
+<div id='map'></div>
 <div id='moreInfo'>For point A (Madeiradrid) to point B (Paris) :The calculated latency of the ella.link networkis, on everage : 27 ms.</div>
 <div class="accordion" id="accordionExample">
   <div class="card">
@@ -75,22 +80,19 @@
         </button>
       </h2>
     </div>
+
+
+
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div>
-        <input type="radio" id="AllNetwork" onclick="Selected()" name="Routes" 
-               >
-        <label for="Routes">All Network</label>
+
+      <div id="menu1">
+
       </div>
-      <div>
-        <input type="radio" id="NetwEllaLinkOnnetork" onclick="Selected()" name="Routes">
-        <label for="Routes">EllaLink On net</label>
-      </div>
-        <div>
-          <input type="checkbox" id="Futureextensions" onclick="Selected()" name="Futureextensions"
-                 >
-          <label for="Futureextensions">Futureextensions</label>
-      </div>
+
     </div>
+
+
+
   </div>
   <div class="card">
     <div class="card-header" id="headingTwo">
@@ -101,14 +103,7 @@
       </h2>
     </div>
     <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" >
-      <div>
-        <input type="radio" id="Lowlatencycapacity" onclick="Selected()" name="Services" 
-               >
-        <label for="Services">Low latency capacity</label>
-      </div>
-      <div>
-        <input type="radio" id="Spectrum" onclick="Selected()" name="Services">
-        <label for="Services">Spectrum</label>
+      <div id="menu2">
       </div>
     </div>
   </div>
@@ -121,37 +116,444 @@
       </h2>
     </div>
     <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" >
-      <div>
-        <input type="checkbox" id="ServicesP" onclick="Selected()" name="servicesP"
-               >
-        <label for="ServicesP">Type 1 – Full services POP</label>
-      </div>
-      <div>
-        <input type="checkbox" id="NetworkP" onclick="Selected()" name="NetworkP">
-        <label for="NetworkP">Type 2 – Network POP</label>
-      </div>
-        <div>
-          <input type="checkbox" id="Virtual" onclick="Selected()" name="Virtual"
-                 >
-          <label for="Virtual">Type 3 – Virtual POP</label>
+      <div id="menu3">
       </div>
     </div>
   </div>
-</div>
+  <div class="card">
+  <div class="card-header" id="headingFour">
+      <h2 class="mb-0">
+        <button class="btn btn btn-dark btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Sites
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFour" class="collapse show" aria-labelledby="headingFour" >
+      <div id="menu4">
+      </div>
+    </div>
+  </div>
     <script>
-
-      L.mapbox.accessToken =
+      mapboxgl.accessToken =
         "pk.eyJ1IjoiYmVuamFtaW5tYXBib3giLCJhIjoiY2tmbWlta3I5MDM2cjJ4b2ZuMHkwZGc3MiJ9.G3LZcBfCM_fI0GD3socJVg";
+      var map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/streets-v11",
+        zoom: 2,
+        center: [10.89014, -24.98042],
+      });
 
-      var map = L.mapbox
-        .map("map")
-        .setView([10.89014, -24.98042], 4)
-        .addLayer(L.mapbox.styleLayer("mapbox://styles/mapbox/streets-v11"));
-    
+      map.on("load", function () {
+
+        map.addLayer({
+          id: "All Network",
+          type: "line",
+          source: {
+            type: "geojson",
+            data:
+              "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/Full_KMZ.geojson",
+          },
+          layout: {
+            // make layer visible by default
+            visibility: "none",
+          },
+          //   paint: {
+          //     "circle-radius": 8,
+          //     "circle-color": "rgba(55,148,179,1)",
+          //   },
+        });
+        map.addLayer({
+          id: "EllaLink On net",
+          type: "circle",
+          source: {
+            type: "geojson",
+            data:
+              "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/Onet.geojson",
+          },
+          layout: {
+            // make layer visible by default
+            visibility: "none",
+          },
+          //   paint: {
+          //     "circle-radius": 8,
+          //     "circle-color": "rgba(55,148,179,1)",
+          //   },
+        });
+
+        // add source and layer for contours
+        // map.addSource("contours", {
+        //   type: "vector",
+        //   url: "mapbox://mapbox.mapbox-terrain-v2",
+        // });
+        map.addLayer({
+          id: "Future extensions",
+          type: "line",
+          source: {
+            type: "geojson",
+            data:
+              "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/Futures_extensions.geojson",
+            // "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/Full_KMZ.geojson",
+          },
+          layout: {
+            // make layer visible by default
+            visibility: "none",
+            // "line-join": "round",
+            // "line-cap": "round",
+          },
+          //   paint: {
+          //     "line-color": "#877b59",
+          //     "line-width": 1,
+          //   },
+        });
+      
+
+      map.addLayer({
+          id: "Capacity Services",
+          type: "line",
+          source: {
+            type: "geojson",
+            data:
+              "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/Capa.geojson",
+          },
+          layout: {
+            // make layer visible by default
+            visibility: "none",
+          },
+          //   paint: {
+          //     "circle-radius": 8,
+          //     "circle-color": "rgba(55,148,179,1)",
+          //   },
+        });
+
+
+      map.addLayer({
+          id: "Managed & Open Spectrum Services",
+          type: "line",
+          source: {
+            type: "geojson",
+            data:
+              "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/Spec.geojson",
+          },
+          layout: {
+            // make layer visible by default
+            visibility: "none",
+          },
+          //   paint: {
+          //     "circle-radius": 8,
+          //     "circle-color": "rgba(55,148,179,1)",
+          //   },
+        });
+      map.addLayer({
+          id: "Type 1 – Full services POP",
+          type: "circle",
+          source: {
+            type: "geojson",
+            data:
+              "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/T1.geojson",
+          },
+          layout: {
+            // make layer visible by default
+            visibility: "none",
+          },
+          //   paint: {
+          //     "circle-radius": 8,
+          //     "circle-color": "rgba(55,148,179,1)",
+          //   },
+        });
+      map.addLayer({
+          id: "Type 2 – Network POP",
+          type: "circle",
+          source: {
+            type: "geojson",
+            data:
+              "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/T2.geojson",
+          },
+          layout: {
+            // make layer visible by default
+            visibility: "none",
+          },
+          //   paint: {
+          //     "circle-radius": 8,
+          //     "circle-color": "rgba(55,148,179,1)",
+          //   },
+        });
+      map.addLayer({
+          id: "Type 3 – Virtual POP",
+          type: "circle",
+          source: {
+            type: "geojson",
+            data:
+              "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/T3.geojson",
+          },
+          layout: {
+            // make layer visible by default
+            visibility: "none",
+          },
+          //   paint: {
+          //     "circle-radius": 8,
+          //     "circle-color": "rgba(55,148,179,1)",
+          //   },
+        });
+      map.addLayer({
+          id: "Data centers",
+          type: "circle",
+          source: {
+            type: "geojson",
+            data:
+              "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/DC.geojson",
+          },
+          layout: {
+            // make layer visible by default
+            visibility: "none",
+          },
+          //   paint: {
+          //     "circle-radius": 8,
+          //     "circle-color": "rgba(55,148,179,1)",
+          //   },
+        });
+      map.addLayer({
+          id: "Cable landing stations",
+          type: "circle",
+          source: {
+            type: "geojson",
+            data:
+              "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/CLS.geojson",
+          },
+          layout: {
+            // make layer visible by default
+            visibility: "none",
+          },
+          //   paint: {
+          //     "circle-radius": 8,
+          //     "circle-color": "rgba(55,148,179,1)",
+          //   },
+        });    
+      map.addLayer({
+          id: "Offices",
+          type: "circle",
+          source: {
+            type: "geojson",
+            data:
+              "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/Office.geojson",
+          },
+          layout: {
+            // make layer visible by default
+            visibility: "none",
+          },
+          //   paint: {
+          //     "circle-radius": 8,
+          //     "circle-color": "rgba(55,148,179,1)",
+          //   },
+        });       
+      map.addLayer({
+          id: "Diversity points",
+          type: "circle",
+          source: {
+            type: "geojson",
+            data:
+              "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/diversity_points.geojson",
+          },
+          layout: {
+            // make layer visible by default
+            visibility: "none",
+          },
+          //   paint: {
+          //     "circle-radius": 8,
+          //     "circle-color": "rgba(55,148,179,1)",
+          //   },
+        });    
+});
+      // enumerate ids of the layers
+      var toggleableLayerIds = ["All Network", "EllaLink On net", "Future extensions", "Capacity Services", "Managed & Open Spectrum Services", "Type 1 – Full services POP", "Type 2 – Network POP", "Type 3 – Virtual POP", "Data centers", "Cable landing stations", "Offices", "Diversity points"];
+
+      // set up the corresponding toggle button for each layer
+      //Network
+      for (var i = 0; i < 2; i++) {
+        var id = toggleableLayerIds[i];
+        var input = document.createElement("input");
+        input.name = "Routes";
+        input.type = "radio";
+        input.href = "#";
+        input.className = "active";
+        input.textContent = id        
+
+        var label = document.createElement("label");
+        label.type = "label";
+        label.textContent = id;
+        input.onclick = function (e) {
+          var clickedLayer = this.textContent;
+          e.preventDefault();
+          e.stopPropagation();
+
+          var visibility = map.getLayoutProperty(clickedLayer, "visibility");
+
+          // toggle layer visibility by changing the layout object's visibility property
+          if (visibility === "visible") {
+            map.setLayoutProperty(clickedLayer, "visibility", "none");
+            this.className = "";
+
+
+          } else {
+            this.className = "active";
+            map.setLayoutProperty(clickedLayer, "visibility", "visible");
+          }
+        };
+        var layers = document.getElementById("menu1");
+        layers.appendChild(input);
+        layers.appendChild(label);
+        var br = document.createElement("br");
+        layers.appendChild(br);
+
+      }
+      //Future extensions
+        var checkbox = document.createElement("input");
+        checkbox.name = "future";
+        checkbox.type = "checkbox";
+        checkbox.href = "#";
+        checkbox.className = "active";
+        checkbox.textContent = toggleableLayerIds[2];        
+
+        var label1 = document.createElement("label");
+        label1.type = "label";
+        label1.textContent = toggleableLayerIds[2];;
+        checkbox.onclick = function (e) {
+          var clickedLayer = this.textContent;
+          e.preventDefault();
+          e.stopPropagation();
+
+          var visibility = map.getLayoutProperty(clickedLayer, "visibility");
+
+          // toggle layer visibility by changing the layout object's visibility property
+          if (visibility === "visible") {
+            map.setLayoutProperty(clickedLayer, "visibility", "none");
+            this.className = "";
+          } else {
+            this.className = "active";
+            map.setLayoutProperty(clickedLayer, "visibility", "visible");
+          }
+        };
+        var layers = document.getElementById("menu1");
+        var br = document.createElement("br");
+        layers.appendChild(checkbox);
+        layers.appendChild(label1);
+        layers.appendChild(br);
+// Services
+      for (var i = 3; i < 5; i++) {
+        var id = toggleableLayerIds[i];
+        var input = document.createElement("input");
+        input.name = "Routes";
+        input.type = "radio";
+        input.href = "#";
+        input.className = "active";
+        input.textContent = id        
+
+        var label = document.createElement("label");
+        label.type = "label";
+        label.textContent = id;
+        input.onclick = function (e) {
+          var clickedLayer = this.textContent;
+          e.preventDefault();
+          e.stopPropagation();
+
+          var visibility = map.getLayoutProperty(clickedLayer, "visibility");
+
+          // toggle layer visibility by changing the layout object's visibility property
+          if (visibility === "visible") {
+            map.setLayoutProperty(clickedLayer, "visibility", "none");
+            this.className = "";
+
+          } else {
+            this.className = "active";
+            map.setLayoutProperty(clickedLayer, "visibility", "visible");
+          }
+        };
+        var layers = document.getElementById("menu2");
+        layers.appendChild(input);
+        layers.appendChild(label);
+        var br = document.createElement("br");
+        layers.appendChild(br);
+
+      }
+
+// Pop
+      for (var i = 5; i < 8; i++) {
+        var id = toggleableLayerIds[i];
+        var input = document.createElement("input");
+        input.name = "Routes";
+        input.type = "checkbox";
+        input.href = "#";
+        input.className = "active";
+        input.textContent = id        
+
+        var label = document.createElement("label");
+        label.type = "label";
+        label.textContent = id;
+        input.onclick = function (e) {
+          var clickedLayer = this.textContent;
+          e.preventDefault();
+          e.stopPropagation();
+
+          var visibility = map.getLayoutProperty(clickedLayer, "visibility");
+
+          // toggle layer visibility by changing the layout object's visibility property
+          if (visibility === "visible") {
+            map.setLayoutProperty(clickedLayer, "visibility", "none");
+            this.className = "";
+
+          } else {
+            this.className = "active";
+            map.setLayoutProperty(clickedLayer, "visibility", "visible");
+          }
+        };
+        var layers = document.getElementById("menu3");
+        layers.appendChild(input);
+        layers.appendChild(label);
+        var br = document.createElement("br");
+        layers.appendChild(br);
+
+      }      
+// Sites
+      for (var i = 8; i < 12; i++) {
+        var id = toggleableLayerIds[i];
+        var input = document.createElement("input");
+        input.name = "Routes";
+        input.type = "checkbox";
+        input.href = "#";
+        input.className = "active";
+        input.textContent = id        
+
+        var label = document.createElement("label");
+        label.type = "label";
+        label.textContent = id;
+        input.onclick = function (e) {
+          var clickedLayer = this.textContent;
+          e.preventDefault();
+          e.stopPropagation();
+
+          var visibility = map.getLayoutProperty(clickedLayer, "visibility");
+
+          // toggle layer visibility by changing the layout object's visibility property
+          if (visibility === "visible") {
+            map.setLayoutProperty(clickedLayer, "visibility", "none");
+            this.className = "";
+
+          } else {
+            this.className = "active";
+            map.setLayoutProperty(clickedLayer, "visibility", "visible");
+          }
+        };
+        var layers = document.getElementById("menu4");
+        layers.appendChild(input);
+        layers.appendChild(label);
+        var br = document.createElement("br");
+        layers.appendChild(br);
+
+      }   
+
 
     </script>
 
-<SCRIPT language=javascript>
+<!-- <SCRIPT language=javascript>
 
   var AllNetwork = document.getElementById("AllNetwork");
   var NetwEllaLinkOnnetork = document.getElementById("NetwEllaLinkOnnetork");
@@ -231,21 +633,34 @@
 
     }
     if(Lowlatencycapacity.checked == true){
-      fetch("https://raw.githubusercontent.com/it-taskforce/EllaLink/master/Capa.geojson")
-      .then(function(response) {
-      return response.json();
-      })
-      .then(function(data) {
-      L.geoJson(data, {
+      var var1;
+      var1=
+      {
           onEachFeature: function (feature, layer) {
-
             var content;
               content = "<h2>" + layer.feature.properties.Name + "<\/h2>" +
               "<p> Description : " + layer.feature.properties.description + "<\/p>";
               layer.bindPopup( content );
-              },
+              }
 
-        }).addTo(map);
+
+
+        };
+      fetch("https://raw.githubusercontent.com/it-taskforce/EllaLink/master/Capa.geojson")
+      .then(function(response) {
+      return response.json();
+      })
+      function (geoJsonFeature) {
+          return {
+                "type": "fill",
+                "paint": {
+                  "fill-color": "#00ffff"
+    }
+          }
+      }
+
+      .then(function(data) {
+      L.geoJson(data, var1).addTo(map);
       });
 
 
@@ -279,6 +694,6 @@
     if(Virtual.checked == true){
     }
   }
-</script>
+</script> -->
   </body>
 </html>
