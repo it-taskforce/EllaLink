@@ -1,0 +1,61 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "EllaLink Sines CLS",
+        "description": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.830578063956317,
+          37.99484260716633
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Madeira CLS",
+        "description": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -16.94402449451962,
+          32.64447916214544
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Fortaleza CLS",
+        "description": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -38.45365231233557,
+          -3.740260980277514
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Praia CLS",
+        "description": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -23.49461055290029,
+          14.92210039357609
+        ]
+      }
+    }
+  ]
+}

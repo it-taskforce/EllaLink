@@ -1,0 +1,47 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "EllaLink Sao Paulo Office",
+        "description": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.67178067978055,
+          -23.58223233641118
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "EllaLink Lisbon Office",
+        "description": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -9.096099975880572,
+          38.7715954746746
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "EllaLink Dublin Office",
+        "description": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.243066872154236,
+          53.33542043499001
+        ]
+      }
+    }
+  ]
+}
