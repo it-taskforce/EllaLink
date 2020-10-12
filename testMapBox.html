@@ -37,7 +37,7 @@
         #accordionExample {
             height: 0%;
             width: 300px;
-            margin-top: 80px;
+            margin-top: 30px;
             background: #fff;
             border-radius: 5px;
             position: absolute;
@@ -146,6 +146,7 @@
         zoom: 2,
         center: [10.89014, -24.98042],
       });
+      map.addControl(new mapboxgl.NavigationControl());
 
       map.on("load", function () {
 
@@ -178,10 +179,10 @@
             // make layer visible by default
             visibility: "none",
           },
-          //   paint: {
-          //     "circle-radius": 8,
-          //     "circle-color": "rgba(55,148,179,1)",
-          //   },
+            paint: {
+              "circle-radius": 8,
+              "circle-color": "rgba(55,148,179,1)",
+            },
         });
 
         // add source and layer for contours
@@ -365,15 +366,41 @@
           //     "circle-radius": 8,
           //     "circle-color": "rgba(55,148,179,1)",
           //   },
-        });    
+        });
+
+
 });
+
+
+             // map.on('click', '', function (e) {
+             //  console.log(e.features[0].properties.Name);
+
+             //  var coordinates = e.features[0].geometry.coordinates.slice();
+             //  var description = e.features[0].properties.Name;
+               
+             //  // Ensure that if the map is zoomed out such that multiple
+             //  // copies of the feature are visible, the popup appears
+             //  // over the copy being pointed to.
+             //  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+             //  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+             //  }
+               
+             //  new mapboxgl.Popup()
+             //  .setLngLat(coordinates)
+             //  .setHTML(description)
+             //  .addTo(map);
+             //  });
+
       // enumerate ids of the layers
       var toggleableLayerIds = ["All Network", "EllaLink On net", "Future extensions", "Capacity Services", "Managed & Open Spectrum Services", "Type 1 – Full services POP", "Type 2 – Network POP", "Type 3 – Virtual POP", "Data centers", "Cable landing stations", "Offices", "Diversity points"];
+
+
 
       // set up the corresponding toggle button for each layer
       //Network
       for (var i = 0; i < 2; i++) {
         var id = toggleableLayerIds[i];
+
         var input = document.createElement("input");
         input.name = "Routes";
         input.type = "radio";
@@ -384,6 +411,7 @@
         var label = document.createElement("label");
         label.type = "label";
         label.textContent = id;
+
         input.onclick = function (e) {
           var clickedLayer = this.textContent;
           e.preventDefault();
@@ -400,6 +428,7 @@
           } else {
             this.className = "active";
             map.setLayoutProperty(clickedLayer, "visibility", "visible");
+            console.log("id",toggleableLayerIds[i]);
           }
         };
         var layers = document.getElementById("menu1");
@@ -552,7 +581,157 @@
         var br = document.createElement("br");
         layers.appendChild(br);
 
-      }   
+      }
+      //popup
+      var toggleableLayerIds1 = ["All Network", "EllaLink On net", "Future extensions", "Capacity Services", "Managed & Open Spectrum Services", "Type 1 – Full services POP", "Type 2 – Network POP", "Type 3 – Virtual POP", "Data centers", "Cable landing stations", "Offices", "Diversity points"];
+
+map.on('click', 'Type 1 – Full services POP', function (e) {
+  console.log(e.features[0].properties.Name);
+
+  var coordinates = e.features[0].geometry.coordinates.slice();
+  var description = e.features[0].properties.Name;
+   
+  // Ensure that if the map is zoomed out such that multiple
+  // copies of the feature are visible, the popup appears
+  // over the copy being pointed to.
+  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  }
+   
+  new mapboxgl.Popup()
+  .setLngLat(coordinates)
+  .setHTML(description)
+  .addTo(map);
+});   
+
+map.on('click', 'Type 2 – Network POP', function (e) {
+  console.log(e.features[0].properties.Name);
+
+  var coordinates = e.features[0].geometry.coordinates.slice();
+  var description = e.features[0].properties.Name;
+   
+  // Ensure that if the map is zoomed out such that multiple
+  // copies of the feature are visible, the popup appears
+  // over the copy being pointed to.
+  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  }
+   
+  new mapboxgl.Popup()
+  .setLngLat(coordinates)
+  .setHTML(description)
+  .addTo(map);
+});  
+map.on('click', 'Type 3 – Virtual POP', function (e) {
+  console.log(e.features[0].properties.Name);
+
+  var coordinates = e.features[0].geometry.coordinates.slice();
+  var description = e.features[0].properties.Name;
+   
+  // Ensure that if the map is zoomed out such that multiple
+  // copies of the feature are visible, the popup appears
+  // over the copy being pointed to.
+  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  }
+   
+  new mapboxgl.Popup()
+  .setLngLat(coordinates)
+  .setHTML(description)
+  .addTo(map);
+});  
+map.on('click', 'Data centers', function (e) {
+  console.log(e.features[0].properties.Name);
+
+  var coordinates = e.features[0].geometry.coordinates.slice();
+  var description = e.features[0].properties.Name;
+   
+  // Ensure that if the map is zoomed out such that multiple
+  // copies of the feature are visible, the popup appears
+  // over the copy being pointed to.
+  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  }
+   
+  new mapboxgl.Popup()
+  .setLngLat(coordinates)
+  .setHTML(description)
+  .addTo(map);
+}); 
+map.on('click', 'Cable landing stations', function (e) {
+  console.log(e.features[0].properties.Name);
+
+  var coordinates = e.features[0].geometry.coordinates.slice();
+  var description = e.features[0].properties.Name;
+   
+  // Ensure that if the map is zoomed out such that multiple
+  // copies of the feature are visible, the popup appears
+  // over the copy being pointed to.
+  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  }
+   
+  new mapboxgl.Popup()
+  .setLngLat(coordinates)
+  .setHTML(description)
+  .addTo(map);
+}); 
+map.on('click', 'Offices', function (e) {
+  console.log(e.features[0].properties.Name);
+
+  var coordinates = e.features[0].geometry.coordinates.slice();
+  var description = e.features[0].properties.Name;
+   
+  // Ensure that if the map is zoomed out such that multiple
+  // copies of the feature are visible, the popup appears
+  // over the copy being pointed to.
+  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  }
+   
+  new mapboxgl.Popup()
+  .setLngLat(coordinates)
+  .setHTML(description)
+  .addTo(map);
+}); 
+map.on('click', 'Cable landing stations', function (e) {
+  console.log(e.features[0].properties.Name);
+
+  var coordinates = e.features[0].geometry.coordinates.slice();
+  var description = e.features[0].properties.Name;
+   
+  // Ensure that if the map is zoomed out such that multiple
+  // copies of the feature are visible, the popup appears
+  // over the copy being pointed to.
+  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  }
+   
+  new mapboxgl.Popup()
+  .setLngLat(coordinates)
+  .setHTML(description)
+  .addTo(map);
+}); 
+map.on('click', 'Diversity points', function (e) {
+  console.log(e.features[0].properties.Name);
+
+  var coordinates = e.features[0].geometry.coordinates.slice();
+  var description = e.features[0].properties.Name;
+   
+  // Ensure that if the map is zoomed out such that multiple
+  // copies of the feature are visible, the popup appears
+  // over the copy being pointed to.
+  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  }
+   
+  new mapboxgl.Popup()
+  .setLngLat(coordinates)
+  .setHTML(description)
+  .addTo(map);
+}); 
+
+
 
 
     </script>
