@@ -52,19 +52,30 @@
           top: 100%;
           margin:-50px auto 0 auto;
           border: 1px solid black;
+        } 
+
+#a0 {
+          background: #000;
+          border: 1px solid black;
+          display:block;
         }
-    .popupCustom .leaflet-popup-tip,
-    .popupCustom .leaflet-popup-content-wrapper {
-        background: #e0e0e0;
-        color: #234c5e;
-        -webkit-transform:skew(-10deg);
-        -moz-transform:skew(30deg);
-        -o-transform:skew(30deg);
-        tranform:skew(30deg);
-    }
+.filter-group input[type='radio'] + label:hover,
+.filter-group input[type='radio']:checked + label {
+background-color: #4ea0da;
+}
+ 
+.filter-group input[type='radio']:checked + label:before {
+content: '✔';
+margin-right: 5px;
+}
+
+
+        /* Preparer le label */
+
     .menu {
         margin-left:5px;
     }
+    
     </style>
        <style>
 
@@ -208,6 +219,7 @@
             paint: {
               'line-width': 4,
               'line-color': '#FFFF00',
+              'line-dasharray': [1, 1]
             },
         });
       
@@ -402,11 +414,10 @@
         var id = toggleableLayerIds[i];
 
         var input = document.createElement("input");
-        input.name = "Routes";
+        input.name = id;
         input.type = "radio";
         input.href = "#";
-        input.className = "active";
-        input.textContent = id        
+        input.textContent = id 
 
         var label = document.createElement("label");
         label.type = "label";
@@ -419,16 +430,15 @@
 
           var visibility = map.getLayoutProperty(clickedLayer, "visibility");
 
+
           // toggle layer visibility by changing the layout object's visibility property
           if (visibility === "visible") {
             map.setLayoutProperty(clickedLayer, "visibility", "none");
             this.className = "";
-
-
           } else {
-            this.className = "active";
+            
             map.setLayoutProperty(clickedLayer, "visibility", "visible");
-            console.log("id",toggleableLayerIds[i]);
+            this.className = "active";
           }
         };
         var layers = document.getElementById("menu1");
@@ -443,7 +453,6 @@
         checkbox.name = "future";
         checkbox.type = "checkbox";
         checkbox.href = "#";
-        checkbox.className = "active";
         checkbox.textContent = toggleableLayerIds[2];        
 
         var label1 = document.createElement("label");
@@ -463,6 +472,7 @@
           } else {
             this.className = "active";
             map.setLayoutProperty(clickedLayer, "visibility", "visible");
+            
           }
         };
         var layers = document.getElementById("menu1");
@@ -474,10 +484,10 @@
       for (var i = 3; i < 5; i++) {
         var id = toggleableLayerIds[i];
         var input = document.createElement("input");
-        input.name = "Routes";
+        input.name = id;
         input.type = "radio";
         input.href = "#";
-        input.className = "active";
+        input.className = i;
         input.textContent = id        
 
         var label = document.createElement("label");
@@ -512,10 +522,10 @@
       for (var i = 5; i < 8; i++) {
         var id = toggleableLayerIds[i];
         var input = document.createElement("input");
-        input.name = "Routes";
+        input.name = id;
         input.type = "checkbox";
         input.href = "#";
-        input.className = "active";
+        input.className = i;
         input.textContent = id        
 
         var label = document.createElement("label");
@@ -549,10 +559,10 @@
       for (var i = 8; i < 12; i++) {
         var id = toggleableLayerIds[i];
         var input = document.createElement("input");
-        input.name = "Routes";
+        input.name = id;
         input.type = "checkbox";
         input.href = "#";
-        input.className = "active";
+        input.className = i;
         input.textContent = id        
 
         var label = document.createElement("label");
@@ -573,6 +583,7 @@
           } else {
             this.className = "active";
             map.setLayoutProperty(clickedLayer, "visibility", "visible");
+
           }
         };
         var layers = document.getElementById("menu4");
@@ -725,12 +736,11 @@ map.on('click', 'Diversity points', function (e) {
   coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
   }
    
-  new mapboxgl.Popup()
-  .setLngLat(coordinates)
-  .setHTML(description)
-  .addTo(map);
+  var popup = new mapboxgl.Popup()
+  popup.setLngLat(coordinates)
+  popup.setHTML(description)
+  popup.addTo(map);
 }); 
-
 
 
 
