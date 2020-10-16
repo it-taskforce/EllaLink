@@ -3,9 +3,9 @@ $(() => {
         "pk.eyJ1IjoiYmVuamFtaW5tYXBib3giLCJhIjoiY2tmbWlta3I5MDM2cjJ4b2ZuMHkwZGc3MiJ9.G3LZcBfCM_fI0GD3socJVg";
     var map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/mapbox/streets-v11",
-        zoom: 2,
-        center: [10.89014, -24.98042],
+        style: "mapbox://styles/gentritbiba/ckgc3ebne2st719qugbefamvy",
+        zoom: 2.45,
+        center: [-49.44189125005539, 5.6687710404076],
     });
     map.addControl(new mapboxgl.NavigationControl());
 
@@ -25,7 +25,7 @@ $(() => {
             },
             paint: {
                 'line-width': 4,
-                'line-color': '#FFFF00',
+                'line-color': '#F7EA3B',
             },
         });
         map.addLayer({
@@ -266,7 +266,7 @@ $(() => {
         category: "routes"
     },
     {
-        id: "None",
+        id: "No Network",
         type: "radio",
         isNone: true,
         category: "routes"
@@ -289,7 +289,7 @@ $(() => {
         category: "services"
     },
     {
-        id: "None",
+        id: "No service",
         type: "radio",
         isNone: true,
         category: "services"
@@ -362,13 +362,13 @@ $(() => {
         input.textContent = id;
         input.value = id;
         input.id = "id-"+id;
+        input.setAttribute("data-isnone", element.isNone);
 
         var label = document.createElement("label");
         label.type = "label";
         label.textContent = id;
         label.setAttribute("for", "id-"+id);
         if(element.isNone)
-        label.setAttribute("data-isNone", element.isNone);
 
         if (element.type !== "radio")
             input.onclick = function (e) {
@@ -403,158 +403,37 @@ $(() => {
         const name = this.name;
         const value = this.value;
         $("input[type=radio][name="+name+"]").removeClass();
-        toggleableLayerIds.filter(elem => elem.category == name).forEach(elem=> {
+        toggleableLayerIds.filter(elem => elem.category == name && !elem.isNone).forEach(elem=> {
             map.setLayoutProperty(elem.id, "visibility", "none");
             this.className = "";
         })
-        if(!$(this).data("isNone")){
+        if($(this).data("isnone") !== true){
             map.setLayoutProperty(value, "visibility", "visible");
         }
         this.className = "active";
     });
-    map.on('click', 'Type 1 – Full services POP', function (e) {
-        console.log(e.features[0].properties.Name);
 
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.Name;
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-    });
-
-    map.on('click', 'Type 2 – Network POP', function (e) {
-        console.log(e.features[0].properties.Name);
-
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.Name;
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-    });
-    map.on('click', 'Type 3 – Virtual POP', function (e) {
-        console.log(e.features[0].properties.Name);
-
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.Name;
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-    });
-    map.on('click', 'Data centers', function (e) {
-        console.log(e.features[0].properties.Name);
-
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.Name;
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-    });
-    map.on('click', 'Cable landing stations', function (e) {
-        console.log(e.features[0].properties.Name);
-
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.Name;
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-    });
-    map.on('click', 'Offices', function (e) {
-        console.log(e.features[0].properties.Name);
-
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.Name;
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-    });
-    map.on('click', 'Cable landing stations', function (e) {
-        console.log(e.features[0].properties.Name);
-
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.Name;
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-    });
-    map.on('click', 'Diversity points', function (e) {
-        console.log(e.features[0].properties.Name);
-
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.Name;
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        var popup = new mapboxgl.Popup()
-        popup.setLngLat(coordinates)
-        popup.setHTML(description)
-        popup.addTo(map);
-    });
+    var layerArray = ['Type 1 – Full services POP', 'Type 2 – Network POP', 'Type 3 – Virtual POP','Data centers', 'Cable landing stations', 'Offices', 'Cable landing stations',  'Diversity points'] ;
+    layerArray.forEach(elem => {
+        
+        map.on('click', elem, function (e) {
+            console.log(e.features[0].properties.Name);
+    
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.Name;
+    
+            // Ensure that if the map is zoome  out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+            map.flyTo({center: e.features[0].geometry.coordinates, zoom:7});
+    
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+    })
 })
