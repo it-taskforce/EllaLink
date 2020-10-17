@@ -1,6 +1,27 @@
 .card [id^=collapse]{
     margin: 10px 20px;
 }
+
+.geocoder-card-wrapper > div{
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none !important;
+}
+.geocoder-card-wrapper .mapboxgl-ctrl-geocoder--button{
+    margin-top: 12px;
+}
+.geocoder-card-wrapper svg{
+    top:34%;
+}
+.geocoder-card-wrapper input{
+    padding-top:20px;
+    padding-bottom:20px;
+    height: auto;
+}
+.geocoder-card-wrapper{
+background-color:white;
+padding: 0;
+}
 body {
     margin: 0;
     padding: 0;
@@ -15,6 +36,21 @@ body {
         position: absolute;
         opacity: 0.9;
         margin-left: 7px;
+    }
+    body .btn-dark.collapsed, body .btn-dark.collapsed:focus{
+        background-color: #192851;
+        border-color: #192851;
+        box-shadow: none !important;
+    }
+    
+    body .btn-dark, body .btn-dark:focus, body .btn-dark:hover{
+        background-color: #005ba8;
+        border-color: #005ba8;
+        box-shadow: none !important;
+    }
+    #options-wrapper input{
+        margin-right: 10px;
+
     }
     #moreInfo {
       background: #fff;

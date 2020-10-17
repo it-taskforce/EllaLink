@@ -368,7 +368,6 @@ $(() => {
         label.type = "label";
         label.textContent = id;
         label.setAttribute("for", "id-"+id);
-        if(element.isNone)
 
         if (element.type !== "radio")
             input.onclick = function (e) {
@@ -428,7 +427,7 @@ $(() => {
             while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
             }
-            map.flyTo({center: e.features[0].geometry.coordinates, zoom:7});
+            map.flyTo({center: e.features[0].geometry.coordinates, zoom:8});
     
             new mapboxgl.Popup()
                 .setLngLat(coordinates)
@@ -436,4 +435,14 @@ $(() => {
                 .addTo(map);
         });
     })
+    map.addControl(
+        new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+        })
+        );
+    const geocoderElem = $(".mapboxgl-ctrl-geocoder");
+    const geocoderWrapper = $("<div class='geocoder-card-wrapper card-header'></div>");
+    geocoderWrapper.append(geocoderElem);
+    $("#options-wrapper").prepend(geocoderWrapper);    
 })
