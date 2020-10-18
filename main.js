@@ -1,7 +1,8 @@
+var map;
 $(() => {
     mapboxgl.accessToken =
         "pk.eyJ1IjoiYmVuamFtaW5tYXBib3giLCJhIjoiY2tmbWlta3I5MDM2cjJ4b2ZuMHkwZGc3MiJ9.G3LZcBfCM_fI0GD3socJVg";
-    var map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/gentritbiba/ckgc3ebne2st719qugbefamvy",
         zoom: 2.45,
@@ -419,8 +420,10 @@ $(() => {
             console.log(e.features[0].properties.Name);
     
             var coordinates = e.features[0].geometry.coordinates.slice();
-            var description = e.features[0].properties.Name;
-    
+            var description = "<div class='text-center'><h5>"
+            +e.features[0].properties.Name
+            +"</h5><p>"+ (e.features[0].properties.description!= "null"?e.features[0].properties.description : "")  + "</p><div>" 
+            console.log(e.features[0])
             // Ensure that if the map is zoome  out such that multiple
             // copies of the feature are visible, the popup appears
             // over the copy being pointed to.
