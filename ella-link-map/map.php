@@ -1,5 +1,20 @@
+<style>
+body{
+  overflow: hidden !important;
+}
+
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+</style>
 <div id="map-wrapper">
-<nav id="menu"></nav>
+<!-- Collapse button -->
+<button class="toggle-menu" onclick="toggleMapOptions()"><i class="fa fa-bars"></i></button>
 
 <div id='map'></div>
 <div id='moreInfo'>For point A (Madeiradrid) to point B (Paris) :The calculated latency of the ella.link networkis, on everage : 27 ms.</div>
