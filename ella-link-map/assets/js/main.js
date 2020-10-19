@@ -520,7 +520,7 @@ $(() => {
         const name = this.name;
         const value = this.value;
         $("input[type=radio][name=" + name + "]").removeClass();
-        toggleableLayerIds.filter(elem => elem.category == name && !elem.isNone).forEach(elem => {
+        toggleableLayerIds.filter(elem => elem.category == name && elem.type == "radio" && !elem.isNone).forEach(elem => {
             map.setLayoutProperty(elem.id, "visibility", "none");
             this.className = "";
         })
