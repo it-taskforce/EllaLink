@@ -65,6 +65,12 @@ body {
     padding: 0;
 }
 
+#options-wrapper .thumbnail-symbol{
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:30px;
+}
+
 #map {
     position: absolute;
     top: 0;

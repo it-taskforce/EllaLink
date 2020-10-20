@@ -531,7 +531,7 @@ $(() => {
         var layers = document.getElementById(element.category + "-menu");
         const row = $("<div class='row'></div>");
         const col = $("<div class='col'></div>");
-        const thumbnail = $("<div class='thumbnail-symbol col-2' style='background-image:url("+symbolMarkers[element.marker].replace("map_icons_small","map_icons_small_thumbnail")+")'></div>");
+        const thumbnail = $("<div class='thumbnail-symbol col-2' style='background-image:url("+(symbolMarkers[element.marker] || "").replace("map_icons_small","map_icons_small_thumbnail")+")'></div>");
 
         col.append(input);
         col.append(label);
