@@ -20,10 +20,10 @@ body{
 <div id='moreInfo'>For point A (Madeiradrid) to point B (Paris) :The calculated latency of the ella.link networkis, on everage : 27 ms.</div>
 <div class="accordion" id="options-wrapper">
   <div class="card">
-    <div class="card-header" id="headingOne">
-      <h2 class="mb-0">
+    <div class="card-header m-0 p-0 px-4 border-0 bg-white" id="headingOne">
+      <h2 class="m-0 p-0">
         <button class="btn btn-dark btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Routes
+          Networks
         </button>
       </h2>
     </div>
@@ -32,7 +32,7 @@ body{
 
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#options-wrapper">
 
-      <div id="routes-menu" class="menu">
+      <div id="network-menu" class="menu">
 
       </div>
 
@@ -41,22 +41,22 @@ body{
 
 
   </div>
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h2 class="mb-0">
+  <!-- <div class="card"> -->
+    <!-- <div class="card-header m-0 p-0 px-4 border-0 bg-white" id="headingTwo">
+      <h2 class="m-0 p-0">
         <button class="btn btn btn-dark btn-block text-left " type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
           Services
         </button>
       </h2>
-    </div>
-    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" >
+    </div> -->
+    <!-- <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" >
       <div id="services-menu" class="menu">
       </div>
-    </div>
-  </div>
+    </div> -->
+  <!-- </div> -->
   <div class="card">
-    <div class="card-header" id="headingThree">
-      <h2 class="mb-0">
+    <div class="card-header m-0 p-0 px-4 border-0 bg-white" id="headingThree">
+      <h2 class="m-0 p-0">
         <button class="btn btn btn-dark btn-block text-left " type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
           POPs
         </button>
@@ -68,8 +68,8 @@ body{
     </div>
   </div>
   <div class="card">
-  <div class="card-header" id="headingFour">
-      <h2 class="mb-0">
+  <div class="card-header m-0 p-0 px-4 border-0 bg-white" id="headingFour">
+      <h2 class="m-0 p-0">
         <button class="btn btn btn-dark btn-block text-left " type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
           Sites
         </button>

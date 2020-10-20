@@ -3,6 +3,15 @@ $ = jQuery;
 // code for converting kmz to geojson
 // enumerate ids of the layers
 var canClick = true;
+var symbolMarkers = {
+    "yellow-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Points/Yellow_point.png",
+    "blue-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Points/Blue__oint.png",
+    "white-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Points/Blue_point_Wb.png",
+    "dc-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/DC/DC_Wb.png",
+    "cs-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/CS/CS_Wb.png",
+    "office-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Office/Office_Yb.png",
+    "dp-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Diverse/Diverse_Yb.png"
+}
 
 function toggleMapOptions() {
     $("#options-wrapper").toggleClass("show");
@@ -14,83 +23,90 @@ var toggleableLayerIds = [{
         id: "All Network",
         type: "radio",
         isDefaultActive: true,
-        category: "routes"
+        category: "network"
     },
     {
         id: "EllaLink On net",
         type: "radio",
-        category: "routes"
+        category: "network"
     },
-    {
-        id: "No Network",
-        type: "radio",
-        isNone: true,
-        category: "routes"
-    },
+    // {
+    //     id: "No Network",
+    //     type: "radio",
+    //     isNone: true,
+    //     category: "network"
+    // },
     {
         id: "Future extensions",
         type: "checkbox",
         isDefaultActive: true,
-        category: "routes"
+        category: "network"
 
     },
-    {
-        id: "Capacity Services",
-        type: "radio",
-        category: "services"
-    },
-    {
-        id: "Managed & Open Spectrum Services",
-        type: "radio",
-        category: "services"
-    },
-    {
-        id: "No service",
-        type: "radio",
-        isNone: true,
-        category: "services"
-    },
+    // {
+    //     id: "Capacity Services",
+    //     type: "radio",
+    //     category: "services"
+    // },
+    // {
+    //     id: "Managed & Open Spectrum Services",
+    //     type: "radio",
+    //     category: "services"
+    // },
+    // {
+    //     id: "No service",
+    //     type: "radio",
+    //     isNone: true,
+    //     category: "services"
+    // },
     {
         id: "Type 1 – Full services POP",
         type: "checkbox",
         isDefaultActive: true,
-        category: "pops"
+        category: "pops",
+        marker:"yellow-marker",
     },
     {
         id: "Type 2 – Network POP",
         type: "checkbox",
         isDefaultActive: true,
-        category: "pops"
+        category: "pops",
+        marker:"yellow-marker",
     },
     {
         id: "Type 3 – Virtual POP",
         type: "checkbox",
         isDefaultActive: true,
-        category: "pops"
+        category: "pops",
+        marker:"white-marker",
     },
     {
         id: "Data centers",
         type: "checkbox",
-        isDefaultActive: true,
-        category: "sites"
+        // isDefaultActive: true,
+        category: "sites",
+        marker:"dc-marker",
     },
     {
         id: "Cable landing stations",
         type: "checkbox",
-        isDefaultActive: true,
-        category: "sites"
+        // isDefaultActive: true,
+        category: "sites",
+        marker:"cs-marker",
     },
     {
         id: "Offices",
         type: "checkbox",
-        isDefaultActive: true,
-        category: "sites"
+        // isDefaultActive: true,
+        category: "sites",
+        marker:"office-marker",
     },
     {
         id: "Diversity points",
         type: "checkbox",
-        isDefaultActive: true,
-        category: "sites"
+        // isDefaultActive: true,
+        category: "sites",
+        marker:"dp-marker",
     }
 ];
 
@@ -298,13 +314,17 @@ $(() => {
                 'line-color': '#0000FF',
             },
         });
-        map.loadImage("https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Points/Yellow_point.png", async function(error, image) { //this is where we load the image file 
+        map.loadImage(symbolMarkers["yellow-marker"], async function(error, image) { //this is where we load the image file 
             if (error) throw error;
             map.addImage("yellow-marker", image); //this is where we name the image file we are loading 
         })
-        map.loadImage("https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Points/Blue_Point.png", async function(error, image) { //this is where we load the image file 
+        map.loadImage(symbolMarkers["blue-marker"], async function(error, image) { //this is where we load the image file 
             if (error) throw error;
             map.addImage("blue-marker", image); //this is where we name the image file we are loading 
+        })
+        map.loadImage(symbolMarkers["white-marker"], async function(error, image) { //this is where we load the image file 
+            if (error) throw error;
+            map.addImage("white-marker", image); //this is where we name the image file we are loading 
         })
         map.addLayer({
             id: "Type 1 – Full services POP",
@@ -352,13 +372,13 @@ $(() => {
                 // make layer visible by default
                 visibility: "none",
 
-                "icon-image": "blue-marker", // the name of image file we used above
+                "icon-image": "white-marker", // the name of image file we used above
                 "icon-allow-overlap": true,
                 "icon-size": .1 //this is a multiplier applied to the standard size. So if you want it half the size put ".5"
 
             },
         });
-        map.loadImage("https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/DC/DC_Wb.png", async function(error, image) { //this is where we load the image file 
+        map.loadImage(symbolMarkers["dc-marker"], async function(error, image) { //this is where we load the image file 
             if (error) throw error;
             map.addImage("dc-marker", image); //this is where we name the image file we are loading 
             map.addLayer({
@@ -381,7 +401,7 @@ $(() => {
                 },
             });
         })
-        map.loadImage("https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/CS/CS_Wb.png", async function(error, image) { //this is where we load the image file 
+        map.loadImage(symbolMarkers["cs-marker"], async function(error, image) { //this is where we load the image file 
             if (error) throw error;
             map.addImage("cs-marker", image); //this is where we name the image file we are loading 
             map.addLayer({
@@ -402,7 +422,7 @@ $(() => {
                 },
             });
         })
-        map.loadImage("https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Office/Office_Yb.png", async function(error, image) { //this is where we load the image file 
+        map.loadImage(symbolMarkers["office-marker"], async function(error, image) { //this is where we load the image file 
             if (error) throw error;
             map.addImage("office-marker", image); //this is where we name the image file we are loading 
             map.addLayer({
@@ -423,7 +443,7 @@ $(() => {
                 },
             });
         })
-        map.loadImage("https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Diverse/Diverse_Yb.png", async function(error, image) { //this is where we load the image file 
+        map.loadImage(symbolMarkers["dp-marker"], async function(error, image) { //this is where we load the image file 
             if (error) throw error;
             map.addImage("dp-marker", image); //this is where we name the image file we are loading 
             map.addLayer({
@@ -509,10 +529,17 @@ $(() => {
 
 
         var layers = document.getElementById(element.category + "-menu");
-        layers.appendChild(input);
-        layers.appendChild(label);
-        var br = document.createElement("br");
-        layers.appendChild(br);
+        const row = $("<div class='row'></div>");
+        const col = $("<div class='col'></div>");
+        const thumbnail = $("<div class='thumbnail-symbol col-2' style='background-image:url("+symbolMarkers[element.marker].replace("map_icons_small","map_icons_small_thumbnail")+")'></div>");
+
+        col.append(input);
+        col.append(label);
+        row.append(col);
+        row.append(thumbnail);
+        layers.appendChild(row[0]);
+        // var br = document.createElement("br");
+        // layers.appendChild(br);
 
     });
     $('#options-wrapper input[type=radio]').change(function() {
