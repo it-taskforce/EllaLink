@@ -3,7 +3,7 @@
  * Plugin Name: Ella link map
  * Description: Ella link map developed with mapboxjs
  * Author:      Gentrit Biba
- * Version:     1.2
+ * Version:     1.3
  */
 
 

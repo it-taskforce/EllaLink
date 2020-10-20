@@ -68,7 +68,9 @@ body {
 #options-wrapper .thumbnail-symbol{
     background-size: contain;
     background-repeat: no-repeat;
-    height:30px;
+    height:25px;
+    display: block;
+    margin-bottom: 5px;
 }
 
 #map {
@@ -183,8 +185,14 @@ body .btn-dark:hover {
     border: none;
     display: none;
 }
+.mapboxgl-canvas{
+    height:100% !important;
+}
 
 @media only screen and (max-width: 768px) {
+    #map-wrapper {
+        top:100px;
+    }
     #options-wrapper label{
         line-height: 1.8;
     }

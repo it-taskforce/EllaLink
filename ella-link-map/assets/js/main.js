@@ -199,6 +199,7 @@ $(() => {
 
 
     map.on("load", async function() {
+        map.resize();
         const [allNetwork, ellaLink, futureExtensions, capacityServices, managedOpenScource, t1, t2, t3, dc, cls, offices, dp] =
         await Promise.all([convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Full_KMZ.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Onnet.kmz'),
@@ -531,12 +532,15 @@ $(() => {
         var layers = document.getElementById(element.category + "-menu");
         const row = $("<div class='row'></div>");
         const col = $("<div class='col'></div>");
-        const thumbnail = $("<div class='thumbnail-symbol col-2' style='background-image:url("+(symbolMarkers[element.marker] || "").replace("map_icons_small","map_icons_small_thumbnail")+")'></div>");
+        const thumbnail = $("<div class='thumbnail-symbol col-1' style='background-image:url("+(symbolMarkers[element.marker] || "").replace("map_icons_small","map_icons_small_thumbnail")+")'></div>");
 
         col.append(input);
         col.append(label);
         row.append(col);
-        row.append(thumbnail);
+        if(element.marker)
+        {
+            row.append(thumbnail);
+        }
         layers.appendChild(row[0]);
         // var br = document.createElement("br");
         // layers.appendChild(br);
