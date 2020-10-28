@@ -218,7 +218,7 @@ $(() => {
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/T2.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/T3.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/DC.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/CLS.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/BenjaminITTF/EllaLink/master/CLS.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Office.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/diversity_points.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/GeoLab.kmz')
@@ -600,14 +600,20 @@ $(() => {
             if (!canClick) return;
             canClick = false;
             setTimeout(function() { canClick = true }, 100);
-            console.log(e.features[0].geometry.coordinates.slice(0,2));
+            console.log('infosplus ',e.features[0]);
 
-
+            var descrition = e.features[0].properties.description;
+            console.log('etat 1', descrition);
+            if (descrition != undefined){
+                descrition= e.features[0].properties.description;
+            }else {
+                descrition="";
+            }   
             var coordinates = e.features[0].geometry.coordinates.slice();
-            var description = "<div class='text-center'><h5>" +
+            var content = "<div class='text-center'><h5>" +
                 e.features[0].properties.name +
-                "</h5><p>" + (e.features[0].geometry.coordinates.slice(0,2)) || "" + "</p><div>"
-            console.log(e.features[0])
+                "</h5><p>" + descrition || "" + "</p><div>"
+
                 // Ensure that if the map is zoome  out such that multiple
                 // copies of the feature are visible, the popup appears
                 // over the copy being pointed to.
@@ -617,7 +623,7 @@ $(() => {
             map.flyTo({ center: e.features[0].geometry.coordinates, zoom: 9 });
             new mapboxgl.Popup()
                 .setLngLat(coordinates)
-                .setHTML(description)
+                .setHTML(content)
                 .addTo(map);
         });
     })
