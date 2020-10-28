@@ -5,12 +5,13 @@ $ = jQuery;
 var canClick = true;
 var symbolMarkers = {
     "yellow-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Points/Yellow_point.png",
-    "blue-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Points/Blue__oint.png",
+    "blue-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Points/Blue_Point.png",
     "white-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Points/Blue_point_Wb.png",
     "dc-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/DC/DC_Wb.png",
     "cs-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/CS/CS_Wb.png",
     "office-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Office/Office_Yb.png",
-    "dp-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Diverse/Diverse_Yb.png"
+    "dp-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Diverse/Diverse_Yb.png",
+    "gl-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons/Gl/LogoGeolab.png"
 }
 
 function toggleMapOptions() {
@@ -107,6 +108,13 @@ var toggleableLayerIds = [{
         // isDefaultActive: true,
         category: "sites",
         marker:"dp-marker",
+    },
+    {
+        id: "GeoLab",
+        type: "checkbox",
+        // isDefaultActive: true,
+        category: "sites",
+        marker:"gl-marker",
     }
 ];
 
@@ -200,7 +208,7 @@ $(() => {
 
     map.on("load", async function() {
         map.resize();
-        const [allNetwork, ellaLink, futureExtensions, capacityServices, managedOpenScource, t1, t2, t3, dc, cls, offices, dp] =
+        const [allNetwork, ellaLink, futureExtensions, capacityServices, managedOpenScource, t1, t2, t3, dc, cls, offices, dp, GeoLab] =
         await Promise.all([convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Full_KMZ.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Onnet.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Futures_extensions.kmz'),
@@ -212,7 +220,8 @@ $(() => {
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/DC.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/CLS.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Office.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/diversity_points.kmz')
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/diversity_points.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/GeoLab.kmz')
         ])
         map.loadImage(
             'https://upload.wikimedia.org/wikipedia/commons/7/7c/201408_cat.png',
@@ -326,6 +335,10 @@ $(() => {
         map.loadImage(symbolMarkers["white-marker"], async function(error, image) { //this is where we load the image file 
             if (error) throw error;
             map.addImage("white-marker", image); //this is where we name the image file we are loading 
+        })
+        map.loadImage(symbolMarkers["gl-marker"], async function(error, image) { //this is where we load the image file 
+            if (error) throw error;
+            map.addImage("gl-marker", image); //this is where we name the image file we are loading 
         })
         map.addLayer({
             id: "Type 1 – Full services POP",
@@ -457,8 +470,27 @@ $(() => {
                 layout: {
                     // make layer visible by default
                     visibility: "none",
-
                     "icon-image": "dp-marker", // the name of image file we used above
+                    "icon-allow-overlap": true,
+                    "icon-size": .19 //this is a multiplier applied to the standard size. So if you want it half the size put ".5"
+
+                },
+            });
+        })
+        map.loadImage(symbolMarkers["gl-marker"], async function(error, image) { //this is where we load the image file 
+            if (error) throw error;
+            map.addImage("gl-marker", image); //this is where we name the image file we are loading 
+            map.addLayer({
+                id: "GeoLab",
+                type: "symbol",
+                source: {
+                    type: "geojson",
+                    data: GeoLab,
+                },
+                layout: {
+                    // make layer visible by default
+                    visibility: "none",
+                    "icon-image": "gl-marker", // the name of image file we used above
                     "icon-allow-overlap": true,
                     "icon-size": .19 //this is a multiplier applied to the standard size. So if you want it half the size put ".5"
 
@@ -568,13 +600,13 @@ $(() => {
             if (!canClick) return;
             canClick = false;
             setTimeout(function() { canClick = true }, 100);
-            console.log(e.features[0].properties.Name);
+            console.log(e.features[0].geometry.coordinates.slice(0,2));
 
 
             var coordinates = e.features[0].geometry.coordinates.slice();
             var description = "<div class='text-center'><h5>" +
                 e.features[0].properties.name +
-                "</h5><p>" + (e.features[0].properties.description || "") + "</p><div>"
+                "</h5><p>" + (e.features[0].geometry.coordinates.slice(0,2)) || "" + "</p><div>"
             console.log(e.features[0])
                 // Ensure that if the map is zoome  out such that multiple
                 // copies of the feature are visible, the popup appears
@@ -583,13 +615,13 @@ $(() => {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
             }
             map.flyTo({ center: e.features[0].geometry.coordinates, zoom: 9 });
-
             new mapboxgl.Popup()
                 .setLngLat(coordinates)
                 .setHTML(description)
                 .addTo(map);
         });
     })
+    
     map.addControl(
         new MapboxGeocoder({
             accessToken: mapboxgl.accessToken,
