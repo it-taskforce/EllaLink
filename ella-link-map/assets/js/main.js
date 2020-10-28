@@ -4,14 +4,14 @@ $ = jQuery;
 // enumerate ids of the layers
 var canClick = true;
 var symbolMarkers = {
-    "yellow-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Points/Yellow_point.png",
-    "blue-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Points/Blue_Point.png",
-    "white-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Points/Blue_point_Wb.png",
-    "dc-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/DC/DC_Wb.png",
-    "cs-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/CS/CS_Wb.png",
-    "office-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Office/Office_Yb.png",
-    "dp-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Diverse/Diverse_Yb.png",
-    "gl-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons/Gl/LogoGeolab.png"
+    "yellow-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/map_icons_small/Points/Yellow_point.png",
+    "blue-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/map_icons_small/Points/Blue_Point.png",
+    "white-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/map_icons_small/Points/Blue_point_Wb.png",
+    "dc-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/map_icons_small/DC/DC_Wb.png",
+    "cs-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/map_icons_small/CS/CS_Wb.png",
+    "office-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/map_icons_small/Office/Office_Yb.png",
+    "dp-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/map_icons_small/Diverse/Diverse_Yb.png",
+    "gl-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/map_icons/Gl/LogoGeolab.png"
 }
 
 function toggleMapOptions() {
@@ -209,19 +209,19 @@ $(() => {
     map.on("load", async function() {
         map.resize();
         const [allNetwork, ellaLink, futureExtensions, capacityServices, managedOpenScource, t1, t2, t3, dc, cls, offices, dp, GeoLab] =
-        await Promise.all([convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Full_KMZ.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Onnet.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Futures_extensions.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Capa_KMZ.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Spec.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/T1.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/T2.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/T3.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/DC.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/BenjaminITTF/EllaLink/master/CLS.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Office.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/diversity_points.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/GeoLab.kmz')
+        await Promise.all([convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/Full_KMZ.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/Onnet.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/Futures_extensions.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/Capa_KMZ.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/Spec.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/T1.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/T2.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/T3.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/DC.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/CLS.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/Office.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/diversity_points.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/kmz/GeoLab.kmz')
         ])
         map.loadImage(
             'https://upload.wikimedia.org/wikipedia/commons/7/7c/201408_cat.png',
@@ -274,7 +274,7 @@ $(() => {
             source: {
                 type: "geojson",
                 data: futureExtensions,
-                // "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/Full_KMZ.geojson",
+                // "https://raw.githubusercontent.com/it-taskforce/EllaLink/develop/Full_KMZ.geojson",
             },
             layout: {
                 // make layer visible by default
