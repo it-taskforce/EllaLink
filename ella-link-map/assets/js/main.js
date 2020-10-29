@@ -11,7 +11,7 @@ var symbolMarkers = {
     "cs-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/CS/CS_Wb.png",
     "office-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Office/Office_Yb.png",
     "dp-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons_small/Diverse/Diverse_Yb.png",
-    "gl-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons/Gl/LogoGeolab.png"
+    "gl-marker" : "https://raw.githubusercontent.com/it-taskforce/EllaLink/master/map_icons/Gl/GeoLab.png"
 }
 
 function toggleMapOptions() {
@@ -110,7 +110,7 @@ var toggleableLayerIds = [{
         marker:"dp-marker",
     },
     {
-        id: "GeoLab",
+        id: "EllaLink GeoLab",
         type: "checkbox",
         // isDefaultActive: true,
         category: "sites",
@@ -208,8 +208,8 @@ $(() => {
 
     map.on("load", async function() {
         map.resize();
-        const [allNetwork, ellaLink, futureExtensions, capacityServices, managedOpenScource, t1, t2, t3, dc, cls, offices, dp, GeoLab] =
-        await Promise.all([convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Full_KMZ.kmz'),
+        const [allNetwork, ellaLink, futureExtensions, capacityServices, managedOpenScource, t1, t2, t3, dc, cls, offices, dp, EllalinkGeoLab] =
+        await Promise.all([convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Full_kmz.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Onnet.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Futures_extensions.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Capa_KMZ.kmz'),
@@ -218,9 +218,9 @@ $(() => {
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/T2.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/T3.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/DC.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/BenjaminITTF/EllaLink/master/CLS.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/CLS.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Office.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/diversity_points.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Diversity_points.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/GeoLab.kmz')
         ])
         map.loadImage(
@@ -481,11 +481,11 @@ $(() => {
             if (error) throw error;
             map.addImage("gl-marker", image); //this is where we name the image file we are loading 
             map.addLayer({
-                id: "GeoLab",
+                id: "EllaLink GeoLab",
                 type: "symbol",
                 source: {
                     type: "geojson",
-                    data: GeoLab,
+                    data: EllalinkGeoLab,
                 },
                 layout: {
                     // make layer visible by default
@@ -593,17 +593,15 @@ $(() => {
         this.className = "active";
     });
 
-    var layerArray = ['Type 1 – Full services POP', 'Type 2 – Network POP', 'Type 3 – Virtual POP', 'Data centers', 'Cable landing stations', 'Offices', 'Cable landing stations', 'Diversity points'];
+    var layerArray = ['Type 1 – Full services POP', 'Type 2 – Network POP', 'Type 3 – Virtual POP', 'Data centers', 'Cable landing stations', 'Offices', 'Cable landing stations', 'Diversity points', 'EllaLink GeoLab'];
     layerArray.forEach(elem => {
 
         map.on('click', elem, function(e) {
             if (!canClick) return;
             canClick = false;
             setTimeout(function() { canClick = true }, 100);
-            console.log('infosplus ',e.features[0]);
 
             var descrition = e.features[0].properties.description;
-            console.log('etat 1', descrition);
             if (descrition != undefined){
                 descrition= e.features[0].properties.description;
             }else {
