@@ -1,3 +1,4 @@
+
 var map;
 $ = jQuery;
 // code for converting kmz to geojson
@@ -209,7 +210,7 @@ $(() => {
     map.on("load", async function() {
         map.resize();
         const [allNetwork, ellaLink, futureExtensions, capacityServices, managedOpenScource, t1, t2, t3, dc, cls, offices, dp, EllalinkGeoLab] =
-        await Promise.all([convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Full_kmz.kmz'),
+        await Promise.all([convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Full_KMZ.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Onnet.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Futures_extensions.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Capa_KMZ.kmz'),
@@ -220,7 +221,7 @@ $(() => {
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/DC.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/CLS.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Office.kmz'),
-            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/Diversity_points.kmz'),
+            convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/diversity_points.kmz'),
             convertKmzGeoJSON('https://raw.githubusercontent.com/it-taskforce/EllaLink/master/kmz/GeoLab.kmz')
         ])
         map.loadImage(
@@ -600,18 +601,33 @@ $(() => {
             if (!canClick) return;
             canClick = false;
             setTimeout(function() { canClick = true }, 100);
+            console.log('etat  ',e.features[0]);
+            var description = e.features[0].properties.description;
+            const contactus = 'Contact us';
+            contact = "<button class='btn btn-secondary' ><a href='https://ella.link/contact/'>"+contactus+"</a></button>";
+            console.log('descrition', e.features[0].properties.description);
+            if (description != undefined){
+                description=e.features[0].properties.description;
 
-            var descrition = e.features[0].properties.description;
-            if (descrition != undefined){
-                descrition= e.features[0].properties.description;
-            }else {
-                descrition="";
-            }   
+                
+                console.log(` ${description.includes(contactus) ? contact=contact : contact=''}`);
+                // expected output: "The word "fox" is in the sentence"
+                console.log('contact = ',contact);
+                var regex=new RegExp("(Contact us)", "g");
+                description=description.replace(regex, "");
+                
+                description=description.replaceAll(".", ".</br>");
+
+                console.log('fini : ',description);     
+            } else {
+                description="";
+                contact ="";
+            }
             var coordinates = e.features[0].geometry.coordinates.slice();
-            var content = "<div class='text-center'><h5>" +
+            var content = "<div class='text-center'><h1>" +
                 e.features[0].properties.name +
-                "</h5><p>" + descrition || "" + "</p><div>"
-
+                "</h1><p>" +description   
+                + "</p><div>"+contact+"</div>" + "<div>"
                 // Ensure that if the map is zoome  out such that multiple
                 // copies of the feature are visible, the popup appears
                 // over the copy being pointed to.
