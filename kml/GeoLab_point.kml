@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document id="root_doc">
+	<gx:CascadingStyle kml:id="__managed_style_032800F62C172FE7339E">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2182&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<width>1.5</width>
+			</LineStyle>
+			<PolyStyle>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>The first permanent infrastructure dedicated to scientific experiments embedded into a commercial Subsea Telecom System.<br>
+EllaLink GeoLab initiative aims to provide the scientific community with real-time,
+accurate and relevant data on seabed conditions along the EllaLink cable route for seismology,
+volcanology, marine ecology, and oceanic conditions research.<br>
+EllaLink is the first telecoms submarine cable to integrate SMART cable concepts.
+Know <b>More</b></body>
+</html>]]></text>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1421221517172FE7339D">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2182&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+			</LineStyle>
+			<PolyStyle>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>The first permanent infrastructure dedicated to scientific experiments embedded into a commercial Subsea Telecom System.<br>
+EllaLink GeoLab initiative aims to provide the scientific community with real-time,
+accurate and relevant data on seabed conditions along the EllaLink cable route for seismology,
+volcanology, marine ecology, and oceanic conditions research.<br>
+EllaLink is the first telecoms submarine cable to integrate SMART cable concepts.
+Know <b>More</b></body>
+</html>]]></text>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0DDB9D3ECA172FE7339D">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1421221517172FE7339D</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_032800F62C172FE7339E</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Folder id="0574F000C2172FE3F1CE">
+		<name>GeoLab</name>
+		<open>1</open>
+		<Placemark id="0064ECF726172FE412ED">
+			<name>EllaLink GeoLab</name>
+			<description><![CDATA[<div>The first permanent infrastructure dedicated to scientific experiments embedded into a commercial Subsea Telecom System. <br></div><div> EllaLink GeoLab initiative aims to provide the scientific community with real-time, <br></div><div> accurate and relevant data on seabed conditions along the EllaLink cable route for seismology, <br></div><div> volcanology, marine ecology, and oceanic conditions research. <br></div><div> EllaLink is the first telecoms submarine cable to integrate SMART cable concepts. <br></div><div> Know More<br></div>]]></description>
+			<styleUrl>#__managed_style_0DDB9D3ECA172FE7339D</styleUrl>
+			<Point>
+				<coordinates>-16.94216617243673,32.38568622093187,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>
